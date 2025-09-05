@@ -98,19 +98,18 @@ type Personmore = {
     name: string,
     age: number,
     isStudent: boolean
-    address: Address
+    address?: Address
 }
-
 
 let person3: Personmore = {
     name: "Joe",
     age: 42,
     isStudent: true, 
-    address: {
-        street: "123 Main",
-        city: "Anytown",
-        country: "USA"
-    }
+    // address: {
+    //     street: "123 Main",
+    //     city: "Anytown",
+    //     country: "USA"
+    // }
 }
 
 let person4: Personmore = {
@@ -123,3 +122,26 @@ let person4: Personmore = {
         country: "USA"
     }
 }
+
+
+//## Optional Properties
+// to make a property optional, just add ? before the colon.
+// bt making a prop optional reduces the type safetiness of the obj
+
+// lets assume that there is func that uses these objects
+
+function displayObjInfo(theObject){
+    console.log(`${theObject.name} lives at ${theObject.address.street}`)
+}
+
+displayObjInfo(person4) // works
+displayObjInfo(person3) // error bcs the person3 doesnt have Address property
+// you can correct this by giving the function declaration (?)
+function displayObjInfo2(theObject){
+    console.log(`${theObject.name} lives at ${theObject.address?.street}`)
+}
+// and the issue with this is that you get undefined for the optional part is it doesnt exist
+displayObjInfo2(person3) // Joe lives at undefined
+
+// the point is everytime u used optional featues, 
+// you are ikely to reduce your type safety a litle bit
