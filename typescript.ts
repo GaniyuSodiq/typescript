@@ -63,3 +63,63 @@ let person2: Person = {
     // isstudent: false // typescript notify use that this is an error. and below is the right one
     isStudent: false
 }
+
+
+//###Nested Object Types
+// lets say we want to add more props to our objects above
+// we to include address
+
+
+// type Personmore = {
+//     name: string,
+//     age: number,
+//     isStudent: boolean
+//     address: {
+//         street: string,
+//         city: string,
+//         country: string
+//     }
+// }
+
+
+// know that by default, the derived obj below will give error.. 
+// if u dont include the address props and its inner props. 
+// There is a way to make a declared prop optional... we'll see that soon.
+// also you can declare the address prop separately on its own, like below
+// this is usefull if you'd be using only Address type in another place
+
+type Address = {
+    street: string,
+    city: string,
+    country: string
+}
+
+type Personmore = {
+    name: string,
+    age: number,
+    isStudent: boolean
+    address: Address
+}
+
+
+let person3: Personmore = {
+    name: "Joe",
+    age: 42,
+    isStudent: true, 
+    address: {
+        street: "123 Main",
+        city: "Anytown",
+        country: "USA"
+    }
+}
+
+let person4: Personmore = {
+    name: "Jill",
+    age: 66,
+    isStudent: false,
+        address: {
+        street: "123 Main",
+        city: "Anytown",
+        country: "USA"
+    }
+}
