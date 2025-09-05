@@ -25,22 +25,22 @@ I’m using this project to understand the basics of TypeScript and how it impro
    git clone https://github.com/GaniyuSodiq/typescript.git
 
 2. Navigate into the project folder:
-
-cd your-repo-name
+   ```bash
+   cd your-repo-name
 
 3. Install dependencies:
-
-npm install
+   ```bash
+   npm install
 
 
 4. Compile TypeScript:
-
-npx tsc
+   ```bash
+   npx tsc
 
 
 5. Run the code (after compilation):
-
-node dist/index.js
+   ```bash
+   node dist/index.js
 
 ## 📂 Project Structure
 project-folder/
