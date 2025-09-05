@@ -19,6 +19,12 @@
 // IMPROVEMENTS THAT TYPESCRIPT BRINGS COMPARED TO JAVASCRIPT
 // we will see the difference by creating a simple restaurant app
 
+// Create a pizza object type
+// custom types can be handy here when we create objects bcs obj can be manny with many props
+type Pizza = {
+    name: string,
+    price: number
+}
 
 // our menu
 const menu = [
@@ -40,7 +46,7 @@ let newOrderId = 0
 const orderQueue = []
 
 // make a utility function that takes a pizza object and add to the menu
-function addNewPizza(pizzaObj){
+function addNewPizza(pizzaObj: Pizza){
     menu.push(pizzaObj)
 }
 addNewPizza({name: "Chicken", price: 8})
@@ -70,7 +76,7 @@ console.log(menu)
 // console.log(orderQueue) // { "pizza": { "name": "Pepperoni", "price": 10 },"status": "ordered"}
 // console.log(myNewOrder) // undefines
 
-function placeOrder(pizzaName) {
+function placeOrder(pizzaName: string) {
     // .find() is am array method used to find an item in the array
     // you provide a callback function and 
     // .find() will iterate the array for the item where the fn is true
