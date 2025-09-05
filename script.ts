@@ -19,8 +19,6 @@
 // IMPROVEMENTS THAT TYPESCRIPT BRINGS COMPARED TO JAVASCRIPT
 // we will see the difference by creating a simple restaurant app
 
-// to assign ID for new orders
-let newOrderId = 0
 
 // our menu
 const menu = [
@@ -33,6 +31,9 @@ const menu = [
 
 // cash in the register
 let cashInRegister = 100
+
+// to assign ID for new orders
+let newOrderId = 0
 
 // keep track or our orders in the queue
 // so workers in the kitchen know what happens next
@@ -75,6 +76,17 @@ function placeOrder(pizzaName) {
     // .find() will iterate the array for the item where the fn is true
     // then return the item
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName)
+    // cashInRegister += selectedPizza.price
+    // in typesript selectedPizza says: selectedPizza is possibly undefined
+    // what ts is saying here is that selectedPizza could be undefined bcs it is made from..
+    // using pizzaName to search through the meny array, and this pizzaName could be undefined easily.
+    // to satisfy ts, we can code a bit more defensively
+    // by telling our program what to do if pizzaName comeback as undefined if (selectedPizza === undefined)
+    // or any falsy value if (!selectedPizza). Then we return from this function
+    if (!selectedPizza){
+        console.error(`${pizzaName} does not exist in the Menu`)
+        return
+    }
     cashInRegister += selectedPizza.price
     newOrderId++
     let orderId = newOrderId
@@ -122,3 +134,13 @@ completeOrder(1) //
 //     "status": "completed"
 // }
 console.log(orderQueue) 
+
+// THIS PROJECT IS MEARNT TO SHOW THE ERROR IN JAVASCRIPT
+// AND HOW TYPESCRIPT CAN HELP - although i have corrected some of this errors 
+// one that could lead to error is 'const cashInRegister = 100'
+// it would have been TypeError
+// and typeerror can crash our app in production.. if it gets pass the test here
+// also someone could call 'completeOrder(1)' with string parameter like completeOrder("1")
+// this would crash our program as well
+
+// LETS MOVE OUR CODE TO TYPESCRIPT AND SEE MORE ERRORS WE COULD FIX
