@@ -26,13 +26,20 @@ type Pizza = {
     price: number
 }
 
+// Order object type
+type Order = {
+    id: number,
+    pizza: Pizza,
+    status: string
+}
+
 // our menu
 const menu = [
     {name: "Margherita", price: 8},
     {name: "Pepperoni", price: 10},
     {name: "Hawaaian", price: 10},
     {name: "Veggie", price: 9},
-    {name: "Jollof R", price: 12},
+    {name: "Jollof", price: 12},
 ]
 
 // cash in the register

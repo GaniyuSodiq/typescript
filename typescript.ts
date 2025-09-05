@@ -145,3 +145,38 @@ displayObjInfo2(person3) // Joe lives at undefined
 
 // the point is everytime u used optional featues, 
 // you are ikely to reduce your type safety a litle bit
+
+
+
+//## Typing Arrays
+// your irst question should be array of ehat are your decalring
+
+let age: number = 100 // we have this in primitives but not the same in array
+// this means age is a number
+
+let ages:number[] = [100, 120, 132] // :number[] an array that consist of only numbers
+// this means ages is an array of numbers
+
+type AnotherPerson = {
+    name: string,
+    age: number,
+    isStudent: boolean
+}
+
+const person6: AnotherPerson = {
+    name: "Wale",
+    age: 20,
+    isStudent: true
+}
+
+const person5: AnotherPerson = {
+    name: "Ngozi",
+    age: 23,
+    isStudent: false
+}
+
+let people: AnotherPerson[] = [person5, person6] // :AnotherPerson[] an array that consist of only AnotherPerson types
+// this means people is an array of AnotherPerson data types
+
+// array type could also be written using Array<TypeName>
+let people1: Array<AnotherPerson> = [person5, person6]
