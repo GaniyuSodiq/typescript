@@ -57,7 +57,7 @@ let newOrderId = 0
 const orderQueue: Order[] = []
 
 // make a utility function that takes a pizza object and add to the menu
-function addNewPizza(pizzaObj: Pizza){
+function addNewPizza(pizzaObj: Pizza): void{
     menu.push(pizzaObj)
 }
 addNewPizza({id: 6, name: "Chicken", price: 8})
@@ -87,7 +87,7 @@ console.log(menu)
 // console.log(orderQueue) // { "pizza": { "name": "Pepperoni", "price": 10 },"status": "ordered"}
 // console.log(myNewOrder) // undefines
 
-function placeOrder(pizzaName: string) {
+function placeOrder(pizzaName: string): Order | undefined {
     // .find() is am array method used to find an item in the array
     // you provide a callback function and 
     // .find() will iterate the array for the item where the fn is true
@@ -128,7 +128,7 @@ console.log(myNewOrder)
  */
 
 
-function completeOrder(orderId: number) {
+function completeOrder(orderId: number): Order {
     // 'orderId: number' is to indicate to ts that d para expected is number
     // the right way of decaring variable is ts
     // let myName: string = "Bob"
@@ -200,10 +200,11 @@ type Identifier = string | number
 
 // type narrowing is when we are expecting a value but we dont know what the type woud be
 // type script allows us to narrow dow in this way 
-function getPizzaDetail(identifier: string | number){
+function getPizzaDetail(identifier: string | number): Pizza | undefined{
     // find the pizza using string or number 
-    // try to be as explicit as you can - TS wants that!
-    if(typeof identifier === "string"){
+    // the return data type can either be Pizza or undefined. 
+    // ... we put them for future devs to know
+    if(typeof identifier === "string"){ // try to be as explicit as you can - TS wants that!
         return menu.find(pizzaObj => pizzaObj.name.toLocaleUpperCase() === identifier.toLowerCase())
     } else if (typeof identifier === "number"){
         return menu.find(pizzaObj => pizzaObj.id === identifier)
@@ -211,3 +212,10 @@ function getPizzaDetail(identifier: string | number){
         throw new Error("Parameter `identifier` must be either a string or a number");        
     }
 }
+
+//## VOID RETURN TYPE
+// there is another return that is not as obvios as we declared Pizza | undefined...
+// ... getPizzaDetail
+// Void is when you have function that does not return anything
+// e.g function addNewPizza(pizzaObj: Pizza): void
+// we use it to tell future dev that we dont expect this fn to return anything

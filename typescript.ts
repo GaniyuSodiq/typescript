@@ -295,3 +295,9 @@ valuee = "hi" // works
 // WHEN SHOULD YOU USE ANY? NEVER USE ANY!
 // only maybe u are just transitioning from JS to TS and u need to get a code to work
 
+
+//## VOID RETURN TYPE
+// there is another return that is not as obvios as we declared Pizza | undefined...
+// ... getPizzaDetail
+// Void is when you have function that does not return anything
+
