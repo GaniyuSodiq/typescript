@@ -50,7 +50,7 @@ let newOrderId = 0
 
 // keep track or our orders in the queue
 // so workers in the kitchen know what happens next
-const orderQueue = []
+const orderQueue: Order[] = []
 
 // make a utility function that takes a pizza object and add to the menu
 function addNewPizza(pizzaObj: Pizza){
@@ -129,7 +129,19 @@ function completeOrder(orderId: number) {
     // let myName: string = "Bob"
     // let numberOfWheels: number = 4
     // let isStudent: boolean = false 
+    // WRONG CODE TO FIX order ts error - i was targeting orderID instead of order itself
+    // if (!(orderId >= 0 && orderId <= orderQueue.length)){
+    //     console.error(`The orderID given is incorrect`)
+    //     return
+    // }
     const order = orderQueue.find(orderObj => orderObj.id === orderId)
+    if (!order){
+        // we caould use only throw. It serves both informing the error and stop the fn
+        // just what consolelog does and what return does for fn. throw is 2 in 1        
+        throw new Error(`The ${orderId} was not found in the order queue`);
+        // console.error(`The ${orderId} was not found in the order queue`)
+        // return
+    }
     order.status = "completed"
     return order
 
@@ -137,6 +149,9 @@ function completeOrder(orderId: number) {
     // const order = orderQueue.find(orderObj => orderObj.id === orderId)
 
     // and then modify it 'order.status = "completed"'
+    // and it will reflect in the orderQueue array
+
+    // we even took out the new order using 'return order'
 
     //this is way shorter and looks more explanatory than .forEach
 }
@@ -164,3 +179,9 @@ console.log(orderQueue)
 // LETS MOVE OUR CODE TO TYPESCRIPT AND SEE MORE ERRORS WE COULD FIX
 
 // WE NOW WRITE IN typescript.ts file
+
+// 
+
+// we now remove all the errors we brought from js
+// for errors not to show in our ts code doesnt mean the code is 100% ts okay
+// however, it is a good step
