@@ -36,21 +36,22 @@ type Order = {
     status: "ordered" | "completed"
 }
 
-// our menu
-const menu: Pizza[] = [
-    {id: 1, name: "Margherita", price: 8},
-    {id: 2, name: "Pepperoni", price: 10},
-    {id: 3, name: "Hawaaian", price: 10},
-    {id: 4, name: "Veggie", price: 9},
-    {id: 5, name: "Jollof", price: 12},
-]
-
-
 // cash in the register
 let cashInRegister = 100
 
 // to assign ID for new orders
 let newOrderId = 0
+let nextPizzaId = 1
+
+// our menu
+const menu: Pizza[] = [
+    {id: nextPizzaId++, name: "Margherita", price: 8},
+    {id: nextPizzaId++, name: "Pepperoni", price: 10},
+    {id: nextPizzaId++, name: "Hawaaian", price: 10},
+    {id: nextPizzaId++, name: "Veggie", price: 9},
+    {id: nextPizzaId++, name: "Jollof", price: 12},
+]
+
 
 // keep track or our orders in the queue
 // so workers in the kitchen know what happens next
@@ -58,9 +59,10 @@ const orderQueue: Order[] = []
 
 // make a utility function that takes a pizza object and add to the menu
 function addNewPizza(pizzaObj: Pizza): void{
+    pizzaObj.id = nextPizzaId++
     menu.push(pizzaObj)
 }
-addNewPizza({id: 6, name: "Chicken", price: 8})
+addNewPizza({name: "Chicken", price: 8})
 console.log(menu)
 
 // make another utility function that placeOrder that takes pizza name
