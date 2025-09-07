@@ -22,24 +22,27 @@
 // Create a pizza object type
 // custom types can be handy here when we create objects bcs obj can be manny with many props
 type Pizza = {
+    id: number,
     name: string,
     price: number
 }
 
 // Order object type
+
+// we can add more type safety to our order status so it is "ordered | "completed"
 type Order = {
     id: number,
     pizza: Pizza,
-    status: string
+    status: "ordered" | "completed"
 }
 
 // our menu
-const menu = [
-    {name: "Margherita", price: 8},
-    {name: "Pepperoni", price: 10},
-    {name: "Hawaaian", price: 10},
-    {name: "Veggie", price: 9},
-    {name: "Jollof", price: 12},
+const menu: Pizza[] = [
+    {id: 1, name: "Margherita", price: 8},
+    {id: 2, name: "Pepperoni", price: 10},
+    {id: 3, name: "Hawaaian", price: 10},
+    {id: 4, name: "Veggie", price: 9},
+    {id: 5, name: "Jollof", price: 12},
 ]
 
 // cash in the register
@@ -56,7 +59,7 @@ const orderQueue: Order[] = []
 function addNewPizza(pizzaObj: Pizza){
     menu.push(pizzaObj)
 }
-addNewPizza({name: "Chicken", price: 8})
+addNewPizza({id: 6, name: "Chicken", price: 8})
 console.log(menu)
 
 // make another utility function that placeOrder that takes pizza name
@@ -103,7 +106,7 @@ function placeOrder(pizzaName: string) {
     cashInRegister += selectedPizza.price
     newOrderId++
     let orderId = newOrderId
-    const newOrder = {id: orderId, pizza: selectedPizza, status: "Ordered"}
+    const newOrder: Order = {id: orderId, pizza: selectedPizza, status: "ordered"}
     orderQueue.push(newOrder)
     return newOrder
 }
