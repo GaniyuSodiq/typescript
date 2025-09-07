@@ -1,6 +1,6 @@
 // OBLIGATORY TYPES BASICS
 
-//###Primitive types defination
+//###PRIMITIVE TYPES DEFINISTION
 // assigning variables in TypeScript
 // let myName = "Bob"
 // myName = 5 
@@ -11,7 +11,7 @@ let numberOfWheels: number = 4
 let isStudent: boolean = false
 
 
-//### Defining Custom Types
+//### DEFINING CUSTOM TYPES
 // we have seen how to define premitive types like string, number, boolean
 // ts allows us to have our own custom types too
 // we can create a new type by using the type keyword and 
@@ -65,7 +65,7 @@ let person2: Person = {
 }
 
 
-//###Nested Object Types
+//### NESTED OBJECT TYPES
 // lets say we want to add more props to our objects above
 // we to include address
 
@@ -124,7 +124,7 @@ let person4: Personmore = {
 }
 
 
-//## Optional Properties
+//## OPTIONAL PROPERTIES
 // to make a property optional, just add ? before the colon.
 // bt making a prop optional reduces the type safetiness of the obj
 
@@ -148,7 +148,7 @@ displayObjInfo2(person3) // Joe lives at undefined
 
 
 
-//## Typing Arrays
+//## TYPE IN ARRAYS
 // your irst question should be array of ehat are your decalring
 
 let age: number = 100 // we have this in primitives but not the same in array
@@ -180,3 +180,27 @@ let people: AnotherPerson[] = [person5, person6] // :AnotherPerson[] an array th
 
 // array type could also be written using Array<TypeName>
 let people1: Array<AnotherPerson> = [person5, person6]
+
+
+//## LITERAL TYPES
+let myyName = "Bob" //  'let myyName: string' when u hover myyName
+// myyName = true // err: Type 'boolean' is not assignable to type 'string'.
+
+const myyName2 = "Bob" // 'const myyName2: "Bob" ' when u hover myyName2
+// this means the type of myyName2 is "Bob" or whatever string we give a const
+// the reason is const's value cannot change. It takes the value & type given at declaratn
+// but the value of 'let' can change which is why we have 'let myyName: string'
+// meaning any other value we give this let must be string
+
+// the behavior of const here is called 'literal types'
+// we could rewrite the const variable in more descritive way like:
+const myyName3: "Bob" = "Bob"
+
+// this indicate that we can literally give a variable parmanet value
+let myyName5: "Bobby" = "Bobby"
+// myyName5 = "Boris" // err: Type '"Boris"' is not assignable to type '"Bobby"'.
+
+// literal types becomes more powerful and useful when paired with Unions concept
+//
+
+
