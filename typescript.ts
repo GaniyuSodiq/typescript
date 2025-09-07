@@ -281,3 +281,17 @@ function fetchUserDetails(username:string):Userr {
 // if Userr wasn't specified, another coder might want to changes this later on
 // and if this fn had been used in other pllaces to return object like we see here,
 // that could be a problem. so using Userr here makes sense.
+
+
+//## TYPE ANY
+let value = 1
+// value = "hi" // err: Type 'string' is not assignable to type 'number'.
+
+let valuee:any = 1
+valuee = "hi" // works
+// any: is used to turn off typescript checking
+// any says: i knw better than TS on how this thing should be typed. 
+// and TS should not help me at all
+// WHEN SHOULD YOU USE ANY? NEVER USE ANY!
+// only maybe u are just transitioning from JS to TS and u need to get a code to work
+
