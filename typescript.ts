@@ -203,4 +203,29 @@ let myyName5: "Bobby" = "Bobby"
 // literal types becomes more powerful and useful when paired with Unions concept
 //
 
+//## UNIONS
+// Lets say in our application, we want to main a diferent kinds of user role
+// For the sake of our app and its database, we will be saving the roles as
+// guest, member or admin. 
+// and we dont want anyone to have a role like 'hacker' or any othe shits like that
+// so we can use the concept of Unios and literal types to inform typescript that...
+// to only allow any of the 3 roles
 
+// we can declare a Union type like
+
+type UserRole = "guest" | "member" | "admin"
+// u can read it like: UserRole can either be "guest" or "member" or "admin"
+
+let userRole: UserRole = "admin"
+// let userRo: UserRole = "hackerRaw" // err: Type '"hackerRaw"' is not assignable to type 'UserRole'.
+
+// we can have Union types in an object type declaration
+type User = {
+    userName: string,
+    role: "guest" | "member" | "admin"
+}
+
+const player1: User = {
+    userName: "Adio",
+    role: "member"
+}
