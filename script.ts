@@ -45,6 +45,7 @@ const menu: Pizza[] = [
     {id: 5, name: "Jollof", price: 12},
 ]
 
+
 // cash in the register
 let cashInRegister = 100
 
@@ -126,6 +127,7 @@ console.log(myNewOrder)
  * this simulates ID we will get from database in real app
  */
 
+
 function completeOrder(orderId: number) {
     // 'orderId: number' is to indicate to ts that d para expected is number
     // the right way of decaring variable is ts
@@ -188,3 +190,21 @@ console.log(orderQueue)
 // we now remove all the errors we brought from js
 // for errors not to show in our ts code doesnt mean the code is 100% ts okay
 // however, it is a good step
+
+//## TYPE NARROWING
+// we want this type to be string or number 
+// bcs we want to take in number or string from the user
+type Identifier = string | number 
+// this works 'function (identifier: Identifier){}'
+// this too works 'identifier: string | number'
+
+// type narrowing is when we are expecting a value but we dont know what the type woud be
+// type script allows us to narrow dow in this way 
+function getPizzaDetail(identifier: string | number){
+    // find the pizza using string or number
+    if(typeof identifier === "string"){
+        return menu.find(pizzaObj => pizzaObj.name.toLocaleUpperCase() === identifier.toLowerCase())
+    } else if (typeof identifier === "number"){
+        return menu.find(pizzaObj => pizzaObj.id === identifier)
+    }
+}

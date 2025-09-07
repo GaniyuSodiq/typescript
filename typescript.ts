@@ -229,3 +229,13 @@ const player1: User = {
     userName: "Adio",
     role: "member"
 }
+
+//## TYPE NARROWING
+// we want this type to be string or number 
+// bcs we want to take in number or string from the user
+type Identifierr = string | number 
+// this works 'function (identifierr: Identifier){}'
+// this too works 'identifierr: string | number'
+
+// type narrowing is when we are expecting a value but we dont know what the type woud be
+// type script allows us to narrow dow in this way 
