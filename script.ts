@@ -201,10 +201,13 @@ type Identifier = string | number
 // type narrowing is when we are expecting a value but we dont know what the type woud be
 // type script allows us to narrow dow in this way 
 function getPizzaDetail(identifier: string | number){
-    // find the pizza using string or number
+    // find the pizza using string or number 
+    // try to be as explicit as you can - TS wants that!
     if(typeof identifier === "string"){
         return menu.find(pizzaObj => pizzaObj.name.toLocaleUpperCase() === identifier.toLowerCase())
     } else if (typeof identifier === "number"){
         return menu.find(pizzaObj => pizzaObj.id === identifier)
+    } else{
+        throw new Error("Parameter `identifier` must be either a string or a number");        
     }
 }
