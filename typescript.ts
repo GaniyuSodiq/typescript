@@ -239,3 +239,45 @@ type Identifierr = string | number
 
 // type narrowing is when we are expecting a value but we dont know what the type woud be
 // type script allows us to narrow dow in this way 
+
+//## BE AS EXPLICIT AS POSSIBLE- TS WANTS THAT
+// function getPizzaDetail(identifier: string | number){
+//     // find the pizza using string or number 
+//     // try to be as explicit as you can - TS wants that!
+//     if(typeof identifier === "string"){
+//         return menu.find(pizzaObj => pizzaObj.name.toLocaleUpperCase() === identifier.toLowerCase())
+//     } else if (typeof identifier === "number"){
+//         return menu.find(pizzaObj => pizzaObj.id === identifier)
+//     } else{
+//         throw new Error("Parameter `identifier` must be either a string or a number");        
+//     }
+// }
+
+//## FUNCTION RETURN TYPES
+
+type UserRolee = "guest" | "member" | "admin"
+
+type Userr = {
+    userName: string,
+    role: UserRolee
+}
+
+const users: Userr[] =[
+    {userName: "john_doe", role: "member"},
+    {userName: "jane_doe", role: "admin"},
+    {userName: "guest_user", role: "guest"},
+]
+// the colon that we put at the front of our fn 
+// tells us what type of data should be returned from our funtion
+// function fetchUserDetails(username: string): Userr
+function fetchUserDetails(username:string):Userr {
+    const user = users.find(user => user.userName === username)
+    if(!user){
+        throw new Error(`User with userName ${username} not found`);        
+    }
+    return user
+}
+// this is useful for refactoring our code.
+// if Userr wasn't specified, another coder might want to changes this later on
+// and if this fn had been used in other pllaces to return object like we see here,
+// that could be a problem. so using Userr here makes sense.
