@@ -301,3 +301,29 @@ valuee = "hi" // works
 // ... getPizzaDetail
 // Void is when you have function that does not return anything
 
+
+//## UTILITY TYPES & PARTIALS
+
+type Userrr = {
+    id: number,
+    userName: string,
+    role: "member" | "contributor" | "admin"
+}
+
+const userss: Userrr[] =[
+    {id: 1, userName: "john_doe", role: "contributor"},
+    {id: 2, userName: "jane_doe", role: "admin"},
+    {id: 3, userName: "member_user", role: "member"},
+    {id: 4, userName: "charlie_brown", role: "member"},
+]
+
+function updateUser(id: number, updates:any){
+    // find the user in the array by the id
+    // use object.assign to update the found user in place
+    // check MDN is you need help with using object.assign
+}
+
+updateUser(1, {userName: "new-john-doe"})
+updateUser(1, {userName: "new-john-doe"})
+
+console.log(userss)
