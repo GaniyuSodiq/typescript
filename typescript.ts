@@ -306,24 +306,45 @@ valuee = "hi" // works
 
 type Userrr = {
     id: number,
-    userName: string,
+    username: string,
     role: "member" | "contributor" | "admin"
 }
 
 const userss: Userrr[] =[
-    {id: 1, userName: "john_doe", role: "contributor"},
-    {id: 2, userName: "jane_doe", role: "admin"},
-    {id: 3, userName: "member_user", role: "member"},
-    {id: 4, userName: "charlie_brown", role: "member"},
+    {id: 1, username: "john_doe", role: "member"},
+    {id: 2, username: "jane_doe", role: "contributor"},
+    {id: 3, username: "member_user", role: "admin"},
+    {id: 4, username: "charlie_brown", role: "member"},
 ]
 
 function updateUser(id: number, updates:any){
+    // // find the user in the array by the id
+    // let user = userss.find(user => user.id === id)
+    // if (!user){
+    //     throw new Error(`There is no user with this ID: ${id}`);        
+    // }
+    // // use object.assign to update the found user in place
+    // // check MDN is you need help with using object.assign
+    // // user.id = id
+    // const updatedUser = Object.assign({}, user, updates)
+    // user = updatedUser
+    // return user
+    // MY ATTEMT ABOVE DOESNT UPDATE THE PARENT ARRAY OF OBJECTS userss
+
     // find the user in the array by the id
-    // use object.assign to update the found user in place
-    // check MDN is you need help with using object.assign
+    const foundUser = userss.find(user => user.id === id)
+    if (!foundUser) {
+        console.error(`There is no user with this ID: ${id}`)
+        return
+    }
+    Object.assign(foundUser, updates)
+    // Object.assign(pasteHere. copyThis)
+    // foundUser is our target object, 
+    // updates is our source object,
+    // updates replaces the similar properties in the foundUser object
 }
 
-updateUser(1, {userName: "new-john-doe"})
-updateUser(1, {userName: "new-john-doe"})
+updateUser(1, {username: "new-john-doe"})
+updateUser(4, {role: "contributor"})
 
 console.log(userss)
