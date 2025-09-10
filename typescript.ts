@@ -427,3 +427,39 @@ function addNewUser(newUser: Omit<Userrr, "id">): Userrr {
 addNewUser({username: "joe_schmoe", role: "member"})
 
 console.log(userss)
+
+
+
+//### GENERICS
+// Adds flexibility to existing functions, Types etc
+// Acts like function parameter but for Types
+// Use angle brackets syntax <Type>
+
+const gameScores = [14, 21, 33, 42, 59]
+const favoriteThings = ["rain drops on roses", "whisker of kittens", "bright copper kettles", "warm wolen mittens"]
+const voters = [{name: "Alice", age: 42}, {name: "Bob", age: 77}]
+
+// function getLastItem(array){ // (parameter) array: any
+//     // Parameter 'array' implicitly has an 'any' type, but a better type may be inferred from usage.
+//     return array[array.length -1]
+// }
+// typescript doesnt like when we have implicit :any type
+// we can explicitly type :any
+// function getLastItem(array: any)
+// but we dont want that bcs this takes off typescript for this type
+// and the main problem is here is that we cant say what type of array it is
+// we dont know if it will be number[], string[], boolean[]
+// this is where generics come to play
+
+function getLastItem <placeholderType> (array: placeholderType[]) :placeholderType | undefined { 
+    return array[array.length -1]
+}
+
+console.log(getLastItem(gameScores)) // 59
+console.log(getLastItem(favoriteThings)) // warm wolen mittens
+console.log(getLastItem(voters)) // {name: "Bob", age: 77}
+
+// generics <placeholderType> can be <whatEverText> gives use flexibility and type safety at the same time
+// unlike :any that takes off type safety all together
+// the text in generics brackets can be anything
+// <Type> or <T> whatever you feel, just be consistent
