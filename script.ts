@@ -58,10 +58,18 @@ const menu: Pizza[] = [
 const orderQueue: Order[] = []
 
 // make a utility function that takes a pizza object and add to the menu
-function addNewPizza(pizzaObj: Pizza): void{
-    pizzaObj.id = nextPizzaId++
-    menu.push(pizzaObj)
+// function addNewPizza(pizzaObj: Pizza): void{
+//     pizzaObj.id = nextPizzaId++
+//     menu.push(pizzaObj)
+// }
+
+function addNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza{
+    // pizzaObj.id = nextPizzaId++
+    const newPizza: Pizza = {id: nextPizzaId++, ...pizzaObj}
+    menu.push(newPizza)
+    return newPizza
 }
+
 addNewPizza({name: "Chicken", price: 8})
 console.log(menu)
 
