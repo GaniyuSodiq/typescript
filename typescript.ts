@@ -303,48 +303,127 @@ valuee = "hi" // works
 
 
 //## UTILITY TYPES & PARTIALS
-
 type Userrr = {
     id: number,
     username: string,
     role: "member" | "contributor" | "admin"
 }
 
+let nextUserId = 1
+
 const userss: Userrr[] =[
-    {id: 1, username: "john_doe", role: "member"},
-    {id: 2, username: "jane_doe", role: "contributor"},
-    {id: 3, username: "member_user", role: "admin"},
-    {id: 4, username: "charlie_brown", role: "member"},
+    {id: nextUserId++, username: "john_doe", role: "member"},
+    {id: nextUserId++, username: "jane_doe", role: "contributor"},
+    {id: nextUserId++, username: "member_user", role: "admin"},
+    {id: nextUserId++, username: "charlie_brown", role: "member"},
 ]
 
-function updateUser(id: number, updates:any){
-    // // find the user in the array by the id
-    // let user = userss.find(user => user.id === id)
-    // if (!user){
-    //     throw new Error(`There is no user with this ID: ${id}`);        
-    // }
-    // // use object.assign to update the found user in place
-    // // check MDN is you need help with using object.assign
-    // // user.id = id
-    // const updatedUser = Object.assign({}, user, updates)
-    // user = updatedUser
-    // return user
-    // MY ATTEMT ABOVE DOESNT UPDATE THE PARENT ARRAY OF OBJECTS userss
+// function updateUser(id: number, updates:any){
+//     // // find the user in the array by the id
+//     // let user = userss.find(user => user.id === id)
+//     // if (!user){
+//     //     throw new Error(`There is no user with this ID: ${id}`);        
+//     // }
+//     // // use object.assign to update the found user in place
+//     // // check MDN is you need help with using object.assign
+//     // // user.id = id
+//     // const updatedUser = Object.assign({}, user, updates)
+//     // user = updatedUser
+//     // return user
+//     // MY ATTEMT ABOVE DOESNT UPDATE THE PARENT ARRAY OF OBJECTS userss
 
-    // find the user in the array by the id
+//     // find the user in the array by the id
+//     const foundUser = userss.find(user => user.id === id)
+//     if (!foundUser) {
+//         console.error(`There is no user with this ID: ${id}`)
+//         return
+//     }
+//     Object.assign(foundUser, updates)
+//     // Object.assign(pasteHere. copyThis)
+//     // foundUser is our target object, 
+//     // updates is our source object,
+//     // updates replaces the similar properties in the foundUser object
+// }
+
+
+    // function updateUser(id: number, updates:any)
+    // we are not supposed to be using :any
+    // and we cant use :Userrr too because we are not providing a full object for the updates
+    // the update will contain only what is needed not entire user object
+    // we could create a similar Userrr type where all the properties will be optional
+    // certainly this would work
+    // but this would be tedious if the Userr obj type has lots of properties
+
+    // so there is a solution to this: Utility Types
+    // Utility types are like functions. They take other types in like a parameter
+    // and return a new type, with changes made to it
+    // they basically perform commonly needed modifications to existing types
+    // the use generic sytax: called angle bracket (<>)
+
+    // an example of Utility types is Partial
+    // Partial modifies the type you pass into it 
+    // and turns all the properties in the type to optional
+
+type UpdatedUserrr = Partial<Userrr>
+// turns all the properties in Userrr into optional and pass into the new type UpdatedUserrr
+// this is what you get
+// type UpdatedUserrr = {
+//     id?: number | undefined;
+//     username?: string | undefined;
+//     role?: "member" | "contributor" | "admin" | undefined;
+// }
+
+function updateUser(id: number, updates: UpdatedUserrr){
     const foundUser = userss.find(user => user.id === id)
     if (!foundUser) {
         console.error(`There is no user with this ID: ${id}`)
         return
     }
     Object.assign(foundUser, updates)
-    // Object.assign(pasteHere. copyThis)
-    // foundUser is our target object, 
-    // updates is our source object,
-    // updates replaces the similar properties in the foundUser object
 }
 
 updateUser(1, {username: "new-john-doe"})
 updateUser(4, {role: "contributor"})
+
+console.log(userss)
+
+
+// function addNewUser(newUser: any): User {
+//     const user = {id: nextUserId++, ...newUser}
+//     // id: is mostly generated from database so you know
+//     userss.push(user)
+//     return user
+// }
+
+// addNewUser({username: "joe_schmoe", role: "member"})
+
+// console.log(userss)
+
+
+// function addNewUser(newUser: any): User
+// we dont want to use the :any here bcs it disables typescript
+// and we wouldnt want Partial too because it makes all the props optional
+// we want our new user to have all the User properties
+// and we also informed our function to return :User. It wont take anything less
+// so what do we do?
+
+// Enter the Omit Type
+
+//###OMIT TYPE
+// Takes in a type like Partial, AND a string (or union of strings) property names
+// and returns a new type with those properties removed
+// the strings are the property names we want to remove
+// Omit<Type, keys>
+// makes a new type by picking all props in Type and remove key(s) from the type. 
+// Key(s) is String literal or series of string literals
+
+function addNewUser(newUser: Omit<Userrr, "id">): Userrr {
+    const user = {id: nextUserId++, ...newUser}
+    // id: is mostly generated from database so you know
+    userss.push(user)
+    return user
+}
+
+addNewUser({username: "joe_schmoe", role: "member"})
 
 console.log(userss)
